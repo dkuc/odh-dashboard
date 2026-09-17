@@ -166,6 +166,14 @@ rules:
     resources:
       - datascienceclusters
   - apiGroups:
+      - components.platform.opendatahub.io
+    resources:
+      - aihubs
+    resourceNames:
+      - default-aihub
+    verbs:
+      - get
+  - apiGroups:
       - dscinitialization.opendatahub.io
     verbs:
       - list

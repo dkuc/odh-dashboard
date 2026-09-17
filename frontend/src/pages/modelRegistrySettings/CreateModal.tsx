@@ -32,7 +32,7 @@ import {
   updateModelRegistryBackend,
 } from '#~/services/modelRegistrySettingsService';
 import FormSection from '#~/components/pf-overrides/FormSection';
-import { AreaContext } from '#~/concepts/areas/AreaContext';
+import useFetchAIHub from '#~/concepts/areas/useFetchAIHub';
 import useModelRegistryCertificateNames from '#~/concepts/modelRegistrySettings/useModelRegistryCertificateNames';
 import {
   buildDatabaseSpec,
@@ -90,7 +90,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose, refresh, modelRegist
   const [isPasswordTouched, setIsPasswordTouched] = React.useState(false);
   const [isDatabaseTouched, setIsDatabaseTouched] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
-  const { dscStatus } = React.useContext(AreaContext);
+  const [aiHub] = useFetchAIHub();
   const secureDbEnabled = useIsAreaAvailable(SupportedArea.MODEL_REGISTRY_SECURE_DB).status;
   const [configSecrets, configSecretsLoaded, configSecretsError] = useModelRegistryCertificateNames(
     !addSecureDB,
@@ -103,7 +103,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose, refresh, modelRegist
     key: '',
     isValid: true,
   });
-  const modelRegistryNamespace = dscStatus?.components?.modelregistry?.registriesNamespace;
+  const modelRegistryNamespace = aiHub?.spec.instancesNamespace;
 
   React.useEffect(() => {
     if (configSecretsLoaded && !configSecretsError && !mr) {

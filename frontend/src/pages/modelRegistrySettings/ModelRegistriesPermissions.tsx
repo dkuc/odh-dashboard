@@ -18,7 +18,7 @@ import { useGroups } from '#~/api';
 import RoleBindingPermissions from '#~/concepts/roleBinding/RoleBindingPermissions';
 import { RoleBindingPermissionsRoleType } from '#~/concepts/roleBinding/types';
 import { useModelRegistryNamespaceCR } from '#~/concepts/modelRegistry/context/useModelRegistryNamespaceCR';
-import { AreaContext } from '#~/concepts/areas/AreaContext';
+import useFetchAIHub from '#~/concepts/areas/useFetchAIHub';
 import {
   createModelRegistryRoleBinding,
   deleteModelRegistryRoleBinding,
@@ -28,8 +28,8 @@ import useModelRegistryRoleBindings from './useModelRegistryRoleBindings';
 import ProjectsSettingsTab from './ProjectsTab/ProjectsSettingsTab';
 
 const ModelRegistriesManagePermissions: React.FC = () => {
-  const { dscStatus } = React.useContext(AreaContext);
-  const modelRegistryNamespace = dscStatus?.components?.modelregistry?.registriesNamespace;
+  const [aiHub] = useFetchAIHub();
+  const modelRegistryNamespace = aiHub?.spec.instancesNamespace;
   const [activeTabKey, setActiveTabKey] = React.useState('users');
   const [ownerReference, setOwnerReference] = React.useState<ModelRegistryKind>();
   const [groups] = useGroups();

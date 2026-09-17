@@ -7,6 +7,7 @@ import moduleFederationRoute from './routes/module-federation';
 
 import apiNotFoundRoute from './routes/api/not-found';
 import buildsRoute from './routes/api/builds/index';
+import aiHubRoute from './routes/api/aihub/index';
 import clusterSettingsRoute from './routes/api/cluster-settings/index';
 import componentsRoute from './routes/api/components/index';
 import configRoute from './routes/api/config/index';
@@ -62,6 +63,7 @@ export async function registerRoutes(
   fastify.register(moduleFederationRoute, opts);
 
   fastify.register(buildsRoute, { ...opts, prefix: '/api/builds' });
+  fastify.register(aiHubRoute, { ...opts, prefix: '/api/aihub' });
   fastify.register(clusterSettingsRoute, { ...opts, prefix: '/api/cluster-settings' });
   fastify.register(componentsRoute, { ...opts, prefix: '/api/components' });
   fastify.register(configRoute, { ...opts, prefix: '/api/config' });

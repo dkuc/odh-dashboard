@@ -41,6 +41,7 @@ import type {
 } from '@odh-dashboard/internal/concepts/modelRegistry/types';
 import type {
   ConfigMapKind,
+  AIHubKind,
   ConnectionTypeConfigMap,
   DashboardConfigKind,
   DataScienceClusterInitializationKindStatus,
@@ -258,6 +259,7 @@ declare global {
           response: OdhResponse<OdhApplication[]>,
         ) => Cypress.Chainable<null>) &
         ((type: 'GET /api/docs', response: OdhResponse<OdhDocument[]>) => Cypress.Chainable<null>) &
+        ((type: 'GET /api/aihub', response: OdhResponse<AIHubKind>) => Cypress.Chainable<null>) &
         ((
           type: 'GET /api/quickstarts',
           response: OdhResponse<OdhQuickStart[]>,

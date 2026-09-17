@@ -23,6 +23,7 @@ import { type ModuleFederationConfig, getModuleFederationURL } from '@odh-dashbo
 import './commands';
 import '../utils/moduleFederationMock';
 import { mockDscStatus } from '@odh-dashboard/plugin-core/__mocks__/mockDscStatus';
+import { mockAIHub } from '@odh-dashboard/k8s-core/__mocks__/mockAIHub';
 import { mockDsciStatus } from '@odh-dashboard/plugin-core/__mocks__/mockDsciStatus';
 import { addCommands as webSocketsAddCommands } from './websockets';
 import { asProjectAdminUser } from '../utils/mockUsers';
@@ -448,6 +449,7 @@ beforeEach(function beforeEachHook(this: Mocha.Context) {
     // Default intercepts.
     cy.interceptOdh('GET /api/dsci/status', mockDsciStatus({}));
     cy.interceptOdh('GET /api/dsc/status', mockDscStatus({}));
+    cy.interceptOdh('GET /api/aihub', mockAIHub());
     asProjectAdminUser();
   }
 });

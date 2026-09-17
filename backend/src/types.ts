@@ -1022,6 +1022,18 @@ export type DataScienceClusterList = {
   items: DataScienceClusterKind[];
 };
 
+export type AIHubKind = K8sResourceCommon & {
+  metadata: {
+    name: string;
+  };
+  spec: {
+    instancesNamespace?: string;
+  };
+  status?: {
+    conditions?: K8sCondition[];
+  };
+};
+
 export type DataScienceClusterInitializationKindStatus = {
   conditions: K8sCondition[];
   phase?: string;

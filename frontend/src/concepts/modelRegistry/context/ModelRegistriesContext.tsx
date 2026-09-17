@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ServiceKind } from '#~/k8sTypes';
 import useModelRegistryEnabled from '#~/concepts/modelRegistry/useModelRegistryEnabled';
 import { useModelRegistryServices } from '#~/concepts/modelRegistry/apiHooks/useModelRegistryServices';
-import { AreaContext } from '#~/concepts/areas/AreaContext';
+import useFetchAIHub from '#~/concepts/areas/useFetchAIHub';
 
 export interface ModelRegistriesContextType {
   modelRegistryServicesLoaded: boolean;
@@ -41,8 +41,8 @@ export const ModelRegistriesContextProvider: React.FC<ModelRegistriesContextProv
 };
 
 const EnabledModelRegistriesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const { dscStatus } = React.useContext(AreaContext);
-  const modelRegistryNamespace = dscStatus?.components?.modelregistry?.registriesNamespace;
+  const [aiHub] = useFetchAIHub();
+  const modelRegistryNamespace = aiHub?.spec.instancesNamespace;
   const [preferredModelRegistry, setPreferredModelRegistry] = React.useState<ServiceKind | null>(
     null,
   );

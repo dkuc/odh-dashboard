@@ -10,7 +10,7 @@ import {
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import TitleWithIcon from '@odh-dashboard/ui-core/design/TitleWithIcon';
 import { ApplicationsPage } from '@odh-dashboard/ui-core';
-import { AreaContext } from '#~/concepts/areas/AreaContext';
+import useFetchAIHub from '#~/concepts/areas/useFetchAIHub';
 import RedirectErrorState from '#~/pages/external/RedirectErrorState';
 import { ProjectObjectType } from '#~/concepts/design/utils';
 import useModelRegistriesBackend from '#~/concepts/modelRegistrySettings/useModelRegistriesBackend';
@@ -20,8 +20,8 @@ import CreateModal from './CreateModal';
 import useModelRegistryRoleBindings from './useModelRegistryRoleBindings';
 
 const ModelRegistrySettings: React.FC = () => {
-  const { dscStatus } = React.useContext(AreaContext);
-  const modelRegistryNamespace = dscStatus?.components?.modelregistry?.registriesNamespace;
+  const [aiHub] = useFetchAIHub();
+  const modelRegistryNamespace = aiHub?.spec.instancesNamespace;
   const [createModalOpen, setCreateModalOpen] = React.useState(false);
 
   const [modelRegistries, mrloaded, loadError, refreshModelRegistries] =
